@@ -5,7 +5,6 @@ Version: 0.1.0
 Author: Jason Moy
 Maintainer: Jason Moy <jasonmoy28@gmail.com>
 Description: A convinenet package for confirmatory factor analysis using the lavaan package and the semTools package. 
-    Use four spaces when indenting paragraphs within the Description.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
