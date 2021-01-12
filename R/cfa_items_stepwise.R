@@ -36,7 +36,7 @@ cfa_items_stepwise = function(data,
         model = model,
         data = data,
         ordered = ordered,
-        return_result = 'summary',
+        return_result = 'short_summary',
         group = group
       )
       cfa_model_summary = as.data.frame(cfa_model_summary)

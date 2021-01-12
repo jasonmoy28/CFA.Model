@@ -32,14 +32,15 @@ cfa_summary = function(model = NULL,
                        return_result = 'model') {
 
   if (is.null(model)) {
-    data = data %>% select(!!!items, !!!group)
+    cfa_data = data %>% select(!!!items, !!!group)
     cfa_items = data %>% select(!!!items) %>% names(.)
     model = paste('DV =~', paste(cfa_items, collapse = ' + '))
+    print(paste('Computing CFA using: ',model))
   }
 
   cfa_model = cfa(
     model = model,
-    data = data,
+    data = cfa_data,
     group = group,
     ordered = ordered
   )
@@ -48,8 +49,11 @@ cfa_summary = function(model = NULL,
   }
   if (return_result == 'model') {
     return(cfa_model)
-  } else if (return_result == 'summary') {
-    cfa_summary = fitMeasures(cfa_model)[summary_item]
-    return(cfa_summary)
+  } else if (return_result == 'short_summary') {
+    cfa_short_summary = fitMeasures(cfa_model)[summary_item]
+    return(cfa_short_summary)
+  } else if(return_result == 'long_summary') {
+    cfa_long_summary = summary(cfa_model,fit.measure =T, standardized = T)
+    return(cfa_long_summary)
   }
 }

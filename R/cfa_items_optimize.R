@@ -45,7 +45,7 @@ cfa_items_optimize = function(data,
         model = model,
         data = data,
         ordered = ordered,
-        return_result = 'summary'
+        return_result = 'short_summary'
       )
       cfa_model_summary = as.data.frame(cfa_model_summary)
       cfa_df = data.frame(item = i, cfi =  cfa_model_summary['cfi', ])
@@ -55,12 +55,7 @@ cfa_items_optimize = function(data,
     max_value = cfa_in_group %>% filter(cfi == max(cfi)) %>% select(cfi) %>% as.numeric(.)
     max_item = cfa_in_group %>% filter(cfi == max(cfi)) %>% select(item) %>% as.character(.)
     if (max_value < threshold) {
-      print(paste(
-        'Optimization Completed: ',
-        length(stepwise_item),
-        ' factors are identified',
-        sep = ''
-      ))
+      print(paste('Optimization Completed: ',length(stepwise_item),' factors are identified',sep = ''))
       return(stepwise_item)
     }
     stepwise_item = c(stepwise_item, max_item)
