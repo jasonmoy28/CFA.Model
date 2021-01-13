@@ -37,23 +37,24 @@ cfa_items_stepwise = function(data,
         data = data,
         ordered = ordered,
         return_result = 'short_summary',
-        group = group
+        group = group,
+        quite = T
       )
-      cfa_model_summary = as.data.frame(cfa_model_summary)
 
       if (length(stepwise_item) > 4) {
-        marginal_cfi = return_df[j - 4 - 1, 'cfi'] - cfa_model_summary['cfi', ]
+        marginal_cfi = return_df[j - 4 - 1, 'cfi'] - cfa_model_summary['cfi']
       } else{
         marginal_cfi = 0
       }
       summary_df = data.frame(
         stepwise_item = i,
-        cfi = cfa_model_summary['cfi', ],
-        rmsea = cfa_model_summary['rmsea', ],
-        tli = cfa_model_summary['tli', ],
+        cfi = cfa_model_summary['cfi'],
+        rmsea = cfa_model_summary['rmsea'],
+        tli = cfa_model_summary['tli'],
         marginal_cfi = marginal_cfi
       )
       return_df = rbind(return_df, summary_df)
+      rownames(return_df) = NULL
     }
   }
   return(return_df)
