@@ -7,7 +7,7 @@
 #' @param items vector or quos(). default to NULL. create a lavaan formula if the formula is not explicitly set in model. if you want to use tidyselect syntax, wrap it in quos() (e.g. quos(contains('Q'))). This argument will be ignored if model is specified.
 #' @param summary_item vector. default is cfi, rmsea, and tli. See lavaan for more option
 #' @param ordered logical. default is F. If it is set to T, lavaan will treat it as a ordinal variable and use DWLS instead of ML
-#' @param return_result character. default is 'model'. You can set it to 'summary' for fit measures
+#' @param return_result character. default is 'model'. You can set it to 'short_summary' for fit measures
 #'
 #' @return
 #' @export
@@ -29,15 +29,19 @@ cfa_summary = function(model = NULL,
                        items = NULL,
                        summary_item = c('cfi', 'rmsea', 'tli'),
                        ordered = F,
-                       return_result = 'model') {
+                       return_result = 'model',
+                       quite = F) {
 
   if (is.null(model)) {
     cfa_data = data %>% select(!!!items, !!!group)
     cfa_items = data %>% select(!!!items) %>% names(.)
     model = paste('DV =~', paste(cfa_items, collapse = ' + '))
-    print(paste('Computing CFA using: ',model))
   }
 
+  cfa_data = data
+  if (quite == F) {
+    print(paste('Computing CFA using: ',model))
+  }
   cfa_model = cfa(
     model = model,
     data = cfa_data,
@@ -53,7 +57,7 @@ cfa_summary = function(model = NULL,
     cfa_short_summary = fitMeasures(cfa_model)[summary_item]
     return(cfa_short_summary)
   } else if(return_result == 'long_summary') {
-    cfa_long_summary = summary(cfa_model,fit.measure =T, standardized = T)
+    cfa_long_summary = summary(cfa_model,fit.measures = T, standardized = T)
     return(cfa_long_summary)
   }
 }

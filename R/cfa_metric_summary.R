@@ -28,12 +28,17 @@ cfa_metric_summary = function(model = NULL,
                               items = NULL,
                               summary_item = c('cfi', 'rmsea', 'tli'),
                               ordered = F,
-                              return_result = 'model') {
+                              return_result = 'model',
+                              quite = F) {
   # Create the lavaan formula if model is not explicitly specify
   if (is.null(model)) {
     cfa_data = data %>% select(!!!items, !!!group)
     cfa_items = data %>% select(!!!items) %>% names(.)
     model = paste('DV =~', paste(cfa_items, collapse = ' + '))
+  }
+
+  cfa_data = data
+  if (quite == F) {
     print(paste('Computing CFA using: ',model))
   }
 
@@ -45,6 +50,7 @@ cfa_metric_summary = function(model = NULL,
     group.equal = 'loadings',
     ordered = ordered
   )
+
   if (ordered) {
     summary_item = paste(summary_item, '.scaled', sep = '')
   }
