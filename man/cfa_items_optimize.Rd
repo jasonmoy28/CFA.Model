@@ -9,7 +9,8 @@ cfa_items_optimize(
   items,
   threshold = 0.9,
   optimize_indicator = "cfi",
-  start_columns = c(1:3),
+  start_columns = NULL,
+  group = NULL,
   ordered = F
 )
 }
@@ -22,7 +23,9 @@ cfa_items_optimize(
 
 \item{optimize_indicator}{the optimize_indicator. default to CFI. You can probably change to rmsea or tli but you must be aware of the cutoff. Haven't tested other indicator except CFI}
 
-\item{start_columns}{vector of length 3. CFA required at least 3 observed factors.By default, it is the first 3 columns that is specified in the items argument. Currently, the function don't support optimizing best 3 initial observed factors.}
+\item{start_columns}{default function or vector of length 3 or greater. default as NULL. CFA required at least 3 observed factors. By default, it will use the cfa_model_optimize_init_factors to find the best 4 initial factors.}
+
+\item{group}{optional character. the nested variable for multilevel dataset (e.g., Country).  If it is specified, it may requires a very long computation time. You can specified the start_columns to avoid lengthy time of optimizing the initial 4 factors.}
 
 \item{ordered}{logical. default is F. If it is set to T, lavaan will treat it as a ordinal variable and use DWLS instead of ML}
 }
@@ -30,5 +33,5 @@ cfa_items_optimize(
 return a vector of the optimized observed factors
 }
 \description{
-The function help you to select the best item for CFA using a data-drive approach. In short, it computed a series of CFA using a stepwise apporach, then it select and retain the best observed factor. Then, it compute again for the best observed factor until the CFI is below the set threshold.
+The function help you to select the best item for CFA using a data-driven approach. In short, it computed a series of CFA using a stepwise apporach, then it select and retain the best observed factor. Then, it compute again for the best observed factor until the CFI is below the set threshold.
 }

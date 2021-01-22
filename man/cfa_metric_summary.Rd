@@ -11,7 +11,8 @@ cfa_metric_summary(
   items = NULL,
   summary_item = c("cfi", "rmsea", "tli"),
   ordered = F,
-  return_result = "model"
+  return_result = "model",
+  quite = F
 )
 }
 \arguments{

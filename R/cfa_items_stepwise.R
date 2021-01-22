@@ -16,14 +16,10 @@ cfa_items_stepwise = function(data,
                               items,
                               group = NULL,
                               ordered = F) {
+
+
   cfa_items = data %>% select(!!!items) %>% names(.)
-  return_df = data.frame(
-    group = NULL,
-    cfi = NULL,
-    rmsea = NULL,
-    tli = NULL,
-    marginal_cfi = NULL
-  )
+  return_df = data.frame(group = NULL, cfi = NULL, rmsea = NULL, tli = NULL, marginal_cfi = NULL)
 
   stepwise_item = NULL
   j = 1

@@ -11,7 +11,8 @@ cfa_summary(
   items = NULL,
   summary_item = c("cfi", "rmsea", "tli"),
   ordered = F,
-  return_result = "model"
+  return_result = "model",
+  quite = F
 )
 }
 \arguments{
@@ -27,7 +28,7 @@ cfa_summary(
 
 \item{ordered}{logical. default is F. If it is set to T, lavaan will treat it as a ordinal variable and use DWLS instead of ML}
 
-\item{return_result}{character. default is 'model'. You can set it to 'summary' for fit measures}
+\item{return_result}{character. default is 'model'. You can set it to 'short_summary' for fit measures}
 }
 \value{
 

@@ -1,6 +1,6 @@
 #' Model Selection: CFA Items Optimizer
 #'
-#' The function help you to select the best item for CFA using a data-drive approach. In short, it computed a series of CFA using a stepwise apporach, then it select and retain the best observed factor. Then, it compute again for the best observed factor until the CFI is below the set threshold.
+#' The function help you to select the best item for CFA using a data-driven approach. In short, it computed a series of CFA using a stepwise apporach, then it select and retain the best observed factor. Then, it compute again for the best observed factor until the CFI is below the set threshold.
 #'
 #' @param data dataframe
 #' @param items vector or quos(). required. create a lavaan formula. if you want to use tidyselect syntax, wrap it in quos() (e.g. quos(contains('Q'))).
@@ -59,7 +59,8 @@ cfa_items_optimize = function(data,
     max_value = cfa_in_group_vector[max_iteration]
 
     if (max_value < threshold) {
-      print(paste('Optimization Completed: ',length(stepwise_item),' factors are identified',sep = ''))
+      print_model = paste('DV =~', paste(stepwise_item, collapse = ' + '))
+      print(paste('Optimization Completed: Model is ',print_model,sep = ''))
       return(stepwise_item)
     }
     stepwise_item = c(stepwise_item, max_item)

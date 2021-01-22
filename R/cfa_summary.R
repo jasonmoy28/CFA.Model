@@ -57,7 +57,6 @@ cfa_summary = function(model = NULL,
     cfa_short_summary = fitMeasures(cfa_model)[summary_item]
     return(cfa_short_summary)
   } else if(return_result == 'long_summary') {
-    cfa_long_summary = summary(cfa_model,fit.measures = T, standardized = T)
-    return(cfa_long_summary)
+    summary(cfa_model,fit.measures = T, standardized = T)
   }
 }

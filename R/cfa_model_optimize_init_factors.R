@@ -1,5 +1,6 @@
 #' Model Selection: CFA Initial Items Optimizer
 #'
+#' This function uses a for loop to find the CFI for all possible combinations of the factors.
 #' @param data dataframe
 #' @param items vector or quos(). required. create a lavaan formula. if you want to use tidyselect syntax, wrap it in quos() (e.g. quos(contains('Q'))).
 #' @param group optional character. the nested variable for multilevel dataset (e.g., Country). If it is specified, it may requires a very long computation time.
