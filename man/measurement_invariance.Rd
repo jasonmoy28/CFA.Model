@@ -4,7 +4,14 @@
 \alias{measurement_invariance}
 \title{Measurement Invariance}
 \usage{
-measurement_invariance(model = NULL, data, items = NULL, group, ordered = F)
+measurement_invariance(
+  model = NULL,
+  data,
+  items = NULL,
+  group,
+  ordered = F,
+  group_partial = NULL
+)
 }
 \arguments{
 \item{model}{explicit lavaan model. use lavaan syntax. If model is not explictly specified, the function will run a CFA assuming all columns belong to one latent variable.}

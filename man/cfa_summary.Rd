@@ -12,7 +12,8 @@ cfa_summary(
   summary_item = c("cfi", "rmsea", "tli"),
   ordered = F,
   return_result = "model",
-  quite = F
+  quite = F,
+  group_partial = NULL
 )
 }
 \arguments{

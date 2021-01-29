@@ -30,7 +30,8 @@ cfa_summary = function(model = NULL,
                        summary_item = c('cfi', 'rmsea', 'tli'),
                        ordered = F,
                        return_result = 'model',
-                       quite = F) {
+                       quite = F,
+                       group_partial = NULL) {
 
   if (is.null(model)) {
     cfa_data = data %>% select(!!!items, !!!group)
@@ -40,13 +41,14 @@ cfa_summary = function(model = NULL,
 
   cfa_data = data
   if (quite == F) {
-    print(paste('Computing CFA using: ',model))
+    print(paste('Computing CFA using:',model))
   }
-  cfa_model = cfa(
+  cfa_model = lavaan::cfa(
     model = model,
     data = cfa_data,
     group = group,
-    ordered = ordered
+    ordered = ordered,
+    group.partial = group_partial
   )
   if (ordered) {
     summary_item = paste(summary_item, '.scaled', sep = '')

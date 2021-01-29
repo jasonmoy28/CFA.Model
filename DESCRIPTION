@@ -11,5 +11,6 @@ LazyData: true
 Depends: 
     lavaan,
     semTools,
-    dplyr
+    dplyr,
+    semPlot
 RoxygenNote: 7.1.1

@@ -18,14 +18,16 @@ measurement_invariance = function(model = NULL,
                                   data,
                                   items = NULL,
                                   group,
-                                  ordered = F) {
+                                  ordered = F,
+                                  group_partial = NULL) {
   print('Computing for configural model')
   config_model = cfa_summary(
     model = model,
     data = data,
     group = group,
     items = items,
-    ordered = ordered
+    ordered = ordered,
+    group_partial = group_partial
   )
   print('Computing for metric model')
   metric_model = cfa_metric_summary(
@@ -33,7 +35,8 @@ measurement_invariance = function(model = NULL,
     data = data,
     group = group,
     items = items,
-    ordered = ordered
+    ordered = ordered,
+    group_partial = group_partial
   )
   fit = compareFit(config_model, metric_model)
   return(fit)
