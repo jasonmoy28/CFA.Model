@@ -11,9 +11,10 @@
 #' @export
 #'
 #' @examples
+#'
 cfa_model_optimize_init_factors = function(data, items, group = NULL, ordered = F, fac_num = 4){
-  col_names = data %>% select(!!!items) %>% names(.)
-  combination_df = as_tibble(combn(col_names,m = fac_num))
+  col_names = data %>% dplyr::select(!!!items) %>% names(.)
+  combination_df = tibble::as_tibble(utils::combn(col_names,m = fac_num))
   print(paste('Start optimizing for the 4 initial factors (Requires ', ncol(combination_df), ' times computation)',sep = ''))
   summary_vector = NULL
   for (i in combination_df) {

@@ -23,6 +23,8 @@ measurement_invariance(
 \item{group}{character. required for metric model.}
 
 \item{ordered}{logical. default is F. If it is set to T, lavaan will treat it as a ordinal variable and use DWLS instead of ML}
+
+\item{group_partial}{items for partial equivalence. form should be c('DV =~ item1', 'DV =~ item2').}
 }
 \value{
 return the compareFit object

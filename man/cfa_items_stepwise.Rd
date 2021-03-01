@@ -21,3 +21,6 @@ cfa_items_stepwise(data, items, group = NULL, ordered = F)
 \description{
 The model will run a series of CFA (similiar to stepwise regression) by adding observed factor to the CFA 1 by 1. Currently, it only support stepwise CFA for one latent factor CFA.
 }
+\examples{
+
+}

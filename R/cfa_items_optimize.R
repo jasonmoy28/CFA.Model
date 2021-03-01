@@ -1,6 +1,6 @@
 #' Model Selection: CFA Items Optimizer
 #'
-#' The function help you to select the best item for CFA using a data-driven approach. In short, it computed a series of CFA using a stepwise apporach, then it select and retain the best observed factor. Then, it compute again for the best observed factor until the CFI is below the set threshold.
+#' The function help you to dplyr::select the best item for CFA using a data-driven approach. In short, it computed a series of CFA using a stepwise apporach, then it dplyr::select and retain the best observed factor. Then, it compute again for the best observed factor until the CFI is below the set threshold.
 #'
 #' @param data dataframe
 #' @param items vector or quos(). required. create a lavaan formula. if you want to use tidyselect syntax, wrap it in quos() (e.g. quos(contains('Q'))).
@@ -13,7 +13,7 @@
 #' @return return a vector of the optimized observed factors
 #' @export
 #'
-#' @examples cfa_items_optimize(data = data, items = quos(IV1:IV3'))
+#' @examples
 #'
 #'
 cfa_items_optimize = function(data,
@@ -24,14 +24,14 @@ cfa_items_optimize = function(data,
                               group = NULL,
                               ordered = F) {
 
-  cfa_items = data %>% select(!!!items) %>% names(.)
+  cfa_items = data %>% dplyr::select(!!!items) %>% names(.)
   return_df = data.frame(group = NULL,cfi = NULL,rmsea = NULL,tli = NULL)
 
   if (is.null(start_columns)) {
     start_columns = cfa_model_optimize_init_factors(data = data, items = items, group = group, ordered = ordered)
   }
 
-  stepwise_item = data %>% select(!!!start_columns) %>% names(.)
+  stepwise_item = data %>% dplyr::select(!!!start_columns) %>% names(.)
   nested_stepwise_item = stepwise_item
   init_length = length(stepwise_item)
   loop_vector = c(1:(length(cfa_items) - init_length))

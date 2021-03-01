@@ -24,6 +24,5 @@ return a dataframe with cfi, rmsea, tli for each group
 This function will run a series of CFA (n = length(group)) with respect to each group. The function is intended to help you get a better understanding of which group has abnormal fit indicator
 }
 \examples{
-# see cfa_summary for the difference between explicit and implicit specifying model
-cfa_groupwise(data = data, group = 'Country', items = quo(contains('Q')))
+
 }

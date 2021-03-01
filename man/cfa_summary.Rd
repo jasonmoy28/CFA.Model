@@ -30,10 +30,17 @@ cfa_summary(
 \item{ordered}{logical. default is F. If it is set to T, lavaan will treat it as a ordinal variable and use DWLS instead of ML}
 
 \item{return_result}{character. default is 'model'. You can set it to 'short_summary' for fit measures}
+
+\item{quite}{default as F. If set to true, it will not print the statement that tells you what the lavaan model is going to run.}
+
+\item{group_partial}{items for partial equivalence. The form should be c('DV =~ item1', 'DV =~ item2').}
 }
 \value{
 
 }
 \description{
 The function is a wrapper of the lavaan::cfa. By default, it fits a lavaan model based on the data by treating everything columns measure a single latent variable.
+}
+\examples{
+
 }

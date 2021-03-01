@@ -13,23 +13,22 @@
 #' @export
 #'
 #' @examples
-#' # see cfa_summary for the difference between explicit and implicit specifying model
-#' cfa_groupwise(data = data, group = 'Country', items = quo(contains('Q')))
+#'
 
 cfa_groupwise = function(model = NULL, data, group, items = NULL, ordered = F){
 
   if (is.null(model)) {
-      data = data %>% select(!!!items, !!!group)
-      cfa_items = data %>% select(!!!items) %>% names(.)
+      data = data %>% dplyr::select(!!!items, !!!group)
+      cfa_items = data %>% dplyr::select(!!!items) %>% names(.)
       model = paste('DV =~', paste(cfa_items, collapse = ' + '))
   }
 
-  groups = data %>% select(!!! group) %>% distinct()
+  groups = data %>% dplyr::select(!!! group) %>% dplyr::distinct()
   groups = c(groups)[[1]]
   return_df = data.frame(group = NULL,cfi = NULL, rmsea = NULL, tli = NULL)
   for (i in groups) {
     cfa_data = data %>%
-      filter(across(!!! group) == i)
+      dplyr::filter(dplyr::across(!!! group) == i)
     cfa_model_summary = cfa_summary(model = model, data = cfa_data,ordered = ordered,return_result = 'summary')
     cfa_model_summary = as.data.frame(cfa_model_summary)
     summary_df = data.frame(group = i, cfi = cfa_model_summary['cfi',], rmsea = cfa_model_summary['rmsea',],tli = cfa_model_summary['tli',])

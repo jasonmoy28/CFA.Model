@@ -2,7 +2,7 @@
 % Please edit documentation in R/SEM_Plot.R
 \name{SEM_Plot}
 \alias{SEM_Plot}
-\title{semPlot::semPaths rewrite}
+\title{the function is not yet ready}
 \usage{
 SEM_Plot(model)
 }
@@ -13,5 +13,8 @@ SEM_Plot(model)
 
 }
 \description{
-semPlot::semPaths rewrite
+the function is not yet ready
+}
+\examples{
+
 }

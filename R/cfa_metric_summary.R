@@ -1,6 +1,7 @@
 #' Confirmatory factor analysis metric model
 #'
 #' The function is a wrapper of the lavaan::cfa. By default, it fits a lavaan model based on the data by treating everything columns measure a single latent variable.
+#'
 #' @param model explicit lavaan model. use lavaan syntax. If model is not explictly specified, the function will run a CFA assuming all columns belong to one latent variable.
 #' @param data dataframe
 #' @param group character. required. the nested variable for multilevel dataset (e.g., Country)
@@ -8,19 +9,14 @@
 #' @param summary_item vector. default is cfi, rmsea, and tli. See lavaan for more option
 #' @param ordered logical. default is F. If it is set to T, lavaan will treat it as a ordinal variable and use DWLS instead of ML
 #' @param return_result character. default is 'model'. You can set it to 'summary' for fit measures
+#' @param quite default as F. If set to true, it will not print the statement that tells you what the lavaan model is going to run.
+#' @param group_partial items for partial equivalence. The form should be c('DV =~ item1', 'DV =~ item2').
 #'
 #' @return
 #' @export
 #'
 #' @examples
-#    #explicitly state the lavaan model (1 latent factor)
-#'   cfa_summary(model = 'DV =~ IV1 + IV2 + IV3', data = data, group = 'Country')
 #'
-#'   # the equivalent without explictly stating the lavaan model (1 latent factor)
-#'   cfa_summary(data = data, items = quos(IV1:IV3'), group = 'Country')
-#'
-#'   # multiple latent factor (must explicitly state the lavaan model)
-#'   cfa_summary(model = 'DV1 =~ IV1 + IV2 + IV3; DV2 =~ IV4 + IV5 + IV6', data = data, group = 'Country')
 #'
 cfa_metric_summary = function(model = NULL,
                               data,
@@ -33,8 +29,8 @@ cfa_metric_summary = function(model = NULL,
                               group_partial = NULL) {
   # Create the lavaan formula if model is not explicitly specify
   if (is.null(model)) {
-    cfa_data = data %>% select(!!!items, !!!group)
-    cfa_items = data %>% select(!!!items) %>% names(.)
+    cfa_data = data %>% dplyr::select(!!!items, !!!group)
+    cfa_items = data %>% dplyr::select(!!!items) %>% names(.)
     model = paste('DV =~', paste(cfa_items, collapse = ' + '))
   }
 
@@ -44,7 +40,7 @@ cfa_metric_summary = function(model = NULL,
   }
 
   # Lavaan modeling
-  cfa_model = cfa(
+  cfa_model = lavaan::cfa(
     model = model,
     data = cfa_data,
     group = group,
@@ -59,7 +55,7 @@ cfa_metric_summary = function(model = NULL,
   if (return_result == 'model') {
     return(cfa_model)
   } else if (return_result == 'short_summary') {
-    cfa_short_summary = fitMeasures(cfa_model)[summary_item]
+    cfa_short_summary = lavaan::fitMeasures(cfa_model)[summary_item]
     return(cfa_short_summary)
   } else if(return_result == 'long_summary') {
     summary(cfa_model,fit.measures = T, standardized = T)

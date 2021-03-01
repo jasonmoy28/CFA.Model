@@ -33,5 +33,9 @@ cfa_items_optimize(
 return a vector of the optimized observed factors
 }
 \description{
-The function help you to select the best item for CFA using a data-driven approach. In short, it computed a series of CFA using a stepwise apporach, then it select and retain the best observed factor. Then, it compute again for the best observed factor until the CFI is below the set threshold.
+The function help you to dplyr::select the best item for CFA using a data-driven approach. In short, it computed a series of CFA using a stepwise apporach, then it dplyr::select and retain the best observed factor. Then, it compute again for the best observed factor until the CFI is below the set threshold.
+}
+\examples{
+
+
 }

@@ -1,6 +1,6 @@
 #' Model Selection: Measurement Invariance Optimizer
 #'
-#' The function help you to select the items for that is fit with measurement invariance using a data-driven approach. It will take very long since it needs to compute the configural and the metric CFA many many times.
+#' The function help you to dplyr::select the items for that is fit with measurement invariance using a data-driven approach. It will take very long since it needs to compute the configural and the metric CFA many many times.
 #' @param data dataframe
 #' @param items vector or quos(). required. create a lavaan formula. if you want to use tidyselect syntax, wrap it in quos() (e.g. quos(contains('Q'))).
 #' @param threshold the delta_CFI threshold. Default is 0.001
@@ -12,12 +12,13 @@
 #' @export
 #'
 #' @examples
+#'
 measurement_invariance_optimize = function(data,
                                            items,
                                            threshold = 0.001,
                                            group,
                                            ordered = F) {
-  cfa_items = data %>% select(!!!items) %>% names(.)
+  cfa_items = data %>% dplyr::select(!!!items) %>% names(.)
   delta_cfi_vec = NULL
   max_item = NULL
   max_list = list(model = NULL, value = NULL)

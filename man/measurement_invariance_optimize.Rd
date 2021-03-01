@@ -27,5 +27,8 @@ measurement_invariance_optimize(
 return a lavaan syntax model
 }
 \description{
-The function help you to select the items for that is fit with measurement invariance using a data-driven approach. It will take very long since it needs to compute the configural and the metric CFA many many times.
+The function help you to dplyr::select the items for that is fit with measurement invariance using a data-driven approach. It will take very long since it needs to compute the configural and the metric CFA many many times.
+}
+\examples{
+
 }

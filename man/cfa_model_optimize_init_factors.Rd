@@ -29,3 +29,6 @@ cfa_model_optimize_init_factors(
 \description{
 This function uses a for loop to find the CFI for all possible combinations of the factors.
 }
+\examples{
+
+}
