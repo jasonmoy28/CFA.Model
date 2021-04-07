@@ -2,27 +2,30 @@
 % Please edit documentation in R/cfa_groupwise.R
 \name{cfa_groupwise}
 \alias{cfa_groupwise}
-\title{Model Selection: cfa_groupwise}
+\title{Confirmatory Factor Analysis (groupwise)}
 \usage{
-cfa_groupwise(model = NULL, data, group, items = NULL, ordered = F)
+cfa_groupwise(data, model = NULL, group, items = NULL, ordered = F)
 }
 \arguments{
-\item{model}{explicit lavaan model. use lavaan syntax. If model is not explictly specified, the function will run a CFA assuming all columns belong to one latent variable.}
+\item{data}{data frame}
 
-\item{data}{dataframe. a multilevel dataset}
+\item{model}{explicit lavaan model. Either the `model` argument or the `items` argument must be specified.}
 
-\item{group}{character. required. the variable uses for series of CFA.}
+\item{group}{character. group variable.}
 
-\item{items}{vector or quos(). default to NULL. create a lavaan formula if the formula is not explicitly set in model. if you want to use tidyselect syntax, wrap it in quos() (e.g. quos(contains('Q'))). This argument will be ignored if model is specified}
+\item{items}{vector of tidyselect syntax or helpers. default to NULL if the model is specified. The argument will be ignored if the model is explicitly specified.}
 
-\item{ordered}{logical. default is `F`. If it is set to `T``, lavaan will treat it as a ordinal variable and use DWLS instead of ML}
-}
-\value{
-return a dataframe with cfi, rmsea, tli for each group
+\item{ordered}{logical. default is F. If it is set to T, lavaan will treat it as a ordinal variable and use DWLS instead of ML}
 }
 \description{
 This function will run a series of CFA (n = length(group)) with respect to each group. The function is intended to help you get a better understanding of which group has abnormal fit indicator
 }
 \examples{
+# The example is used as the illustration of the function output only.
+# It does not imply the data is appropriate for the analysis. 
+cfa_groupwise(data = iris,group = 'Species',items = c(everything(), - Species))
 
+}
+\references{
+Rosseel Y (2012). lavaan: An R Package for Structural Equation Modeling. Journal of Statistical Software, 48(2), 1–36. https://www.jstatsoft.org/v48/i02/.
 }
